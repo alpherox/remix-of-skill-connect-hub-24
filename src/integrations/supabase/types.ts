@@ -14,16 +14,185 @@ export type Database = {
   }
   public: {
     Tables: {
+      applications: {
+        Row: {
+          cover_letter: string | null
+          created_at: string
+          id: string
+          job_id: string
+          resume_url: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cover_letter?: string | null
+          created_at?: string
+          id?: string
+          job_id: string
+          resume_url?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cover_letter?: string | null
+          created_at?: string
+          id?: string
+          job_id?: string
+          resume_url?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "job_postings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      courses: {
+        Row: {
+          category: string | null
+          chapters: Json | null
+          created_at: string
+          description: string | null
+          duration: string | null
+          id: string
+          instructor: string
+          instructor_bio: string | null
+          is_featured: boolean | null
+          is_free: boolean | null
+          is_published: boolean | null
+          price: number
+          rating: number | null
+          review_count: number | null
+          tags: string[] | null
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+          video_url: string | null
+        }
+        Insert: {
+          category?: string | null
+          chapters?: Json | null
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          id?: string
+          instructor: string
+          instructor_bio?: string | null
+          is_featured?: boolean | null
+          is_free?: boolean | null
+          is_published?: boolean | null
+          price?: number
+          rating?: number | null
+          review_count?: number | null
+          tags?: string[] | null
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Update: {
+          category?: string | null
+          chapters?: Json | null
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          id?: string
+          instructor?: string
+          instructor_bio?: string | null
+          is_featured?: boolean | null
+          is_free?: boolean | null
+          is_published?: boolean | null
+          price?: number
+          rating?: number | null
+          review_count?: number | null
+          tags?: string[] | null
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
+      ebooks: {
+        Row: {
+          author: string
+          category: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_featured: boolean | null
+          is_free: boolean | null
+          is_published: boolean | null
+          pdf_url: string | null
+          price: number
+          rating: number | null
+          review_count: number | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author: string
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_featured?: boolean | null
+          is_free?: boolean | null
+          is_published?: boolean | null
+          pdf_url?: string | null
+          price?: number
+          rating?: number | null
+          review_count?: number | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string
+          category?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_featured?: boolean | null
+          is_free?: boolean | null
+          is_published?: boolean | null
+          pdf_url?: string | null
+          price?: number
+          rating?: number | null
+          review_count?: number | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       job_postings: {
         Row: {
           company: string
           created_at: string
+          created_by: string | null
+          deadline: string | null
           description: string | null
           external_link: string | null
           id: string
           is_active: boolean | null
+          is_approved: boolean | null
+          is_featured: boolean | null
           job_type: string | null
           location: string | null
+          logo_url: string | null
           required_skills: string[] | null
           salary_range: string | null
           title: string
@@ -32,12 +201,17 @@ export type Database = {
         Insert: {
           company: string
           created_at?: string
+          created_by?: string | null
+          deadline?: string | null
           description?: string | null
           external_link?: string | null
           id?: string
           is_active?: boolean | null
+          is_approved?: boolean | null
+          is_featured?: boolean | null
           job_type?: string | null
           location?: string | null
+          logo_url?: string | null
           required_skills?: string[] | null
           salary_range?: string | null
           title: string
@@ -46,12 +220,17 @@ export type Database = {
         Update: {
           company?: string
           created_at?: string
+          created_by?: string | null
+          deadline?: string | null
           description?: string | null
           external_link?: string | null
           id?: string
           is_active?: boolean | null
+          is_approved?: boolean | null
+          is_featured?: boolean | null
           job_type?: string | null
           location?: string | null
+          logo_url?: string | null
           required_skills?: string[] | null
           salary_range?: string | null
           title?: string
@@ -104,6 +283,75 @@ export type Database = {
         }
         Relationships: []
       }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean | null
+          link: string | null
+          message: string
+          type: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message: string
+          type?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message?: string
+          type?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      pricing_plans: {
+        Row: {
+          billing_cycle: string | null
+          created_at: string
+          features: string[] | null
+          id: string
+          is_active: boolean | null
+          is_highlighted: boolean | null
+          name: string
+          price: number
+          sort_order: number | null
+          updated_at: string
+        }
+        Insert: {
+          billing_cycle?: string | null
+          created_at?: string
+          features?: string[] | null
+          id?: string
+          is_active?: boolean | null
+          is_highlighted?: boolean | null
+          name: string
+          price?: number
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Update: {
+          billing_cycle?: string | null
+          created_at?: string
+          features?: string[] | null
+          id?: string
+          is_active?: boolean | null
+          is_highlighted?: boolean | null
+          name?: string
+          price?: number
+          sort_order?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -112,7 +360,9 @@ export type Database = {
           experience_level: string | null
           full_name: string | null
           id: string
+          location: string | null
           preferred_industries: string[] | null
+          resume_url: string | null
           skills: string[] | null
           updated_at: string
           user_id: string
@@ -124,7 +374,9 @@ export type Database = {
           experience_level?: string | null
           full_name?: string | null
           id?: string
+          location?: string | null
           preferred_industries?: string[] | null
+          resume_url?: string | null
           skills?: string[] | null
           updated_at?: string
           user_id: string
@@ -136,10 +388,128 @@ export type Database = {
           experience_level?: string | null
           full_name?: string | null
           id?: string
+          location?: string | null
           preferred_industries?: string[] | null
+          resume_url?: string | null
           skills?: string[] | null
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      purchases: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          product_id: string
+          product_type: string
+          status: string
+          stripe_payment_id: string | null
+          user_id: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          id?: string
+          product_id: string
+          product_type: string
+          status?: string
+          stripe_payment_id?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          product_id?: string
+          product_type?: string
+          status?: string
+          stripe_payment_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_jobs: {
+        Row: {
+          created_at: string
+          id: string
+          job_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          job_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          job_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_jobs_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "job_postings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      site_settings: {
+        Row: {
+          id: string
+          key: string
+          updated_at: string
+          value: string | null
+        }
+        Insert: {
+          id?: string
+          key: string
+          updated_at?: string
+          value?: string | null
+        }
+        Update: {
+          id?: string
+          key?: string
+          updated_at?: string
+          value?: string | null
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean | null
+          name: string
+          photo_url: string | null
+          quote: string
+          role: string | null
+          sort_order: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          name: string
+          photo_url?: string | null
+          quote: string
+          role?: string | null
+          sort_order?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          photo_url?: string | null
+          quote?: string
+          role?: string | null
+          sort_order?: number | null
         }
         Relationships: []
       }
@@ -175,7 +545,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "moderator" | "user"
+      app_role: "admin" | "moderator" | "user" | "employer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -303,7 +673,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "moderator", "user"],
+      app_role: ["admin", "moderator", "user", "employer"],
     },
   },
 } as const
