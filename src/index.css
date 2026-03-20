@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 60 20% 99%;
+    --foreground: 160 30% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 160 30% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 30% 8%;
+
+    --primary: 160 45% 22%;
+    --primary-foreground: 60 20% 99%;
+
+    --secondary: 45 80% 58%;
+    --secondary-foreground: 160 30% 8%;
+
+    --muted: 160 10% 95%;
+    --muted-foreground: 160 10% 42%;
+
+    --accent: 45 80% 58%;
+    --accent-foreground: 160 30% 8%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 60 20% 99%;
+
+    --border: 160 10% 90%;
+    --input: 160 10% 90%;
+    --ring: 160 45% 22%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 160 15% 97%;
+    --sidebar-foreground: 160 30% 8%;
+    --sidebar-primary: 160 45% 22%;
+    --sidebar-primary-foreground: 60 20% 99%;
+    --sidebar-accent: 160 10% 93%;
+    --sidebar-accent-foreground: 160 30% 8%;
+    --sidebar-border: 160 10% 90%;
+    --sidebar-ring: 160 45% 22%;
+
+    /* Custom tokens */
+    --emerald-glow: 160 45% 32%;
+    --amber-warm: 38 92% 60%;
+    --amber-light: 45 100% 94%;
+    --surface-elevated: 0 0% 100%;
+    --surface-sunken: 160 15% 97%;
+
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  .dark {
+    --background: 160 30% 4%;
+    --foreground: 60 10% 95%;
+
+    --card: 160 25% 7%;
+    --card-foreground: 60 10% 95%;
+
+    --popover: 160 25% 7%;
+    --popover-foreground: 60 10% 95%;
+
+    --primary: 160 45% 45%;
+    --primary-foreground: 160 30% 4%;
+
+    --secondary: 45 80% 58%;
+    --secondary-foreground: 160 30% 4%;
+
+    --muted: 160 15% 12%;
+    --muted-foreground: 160 10% 55%;
+
+    --accent: 45 80% 58%;
+    --accent-foreground: 160 30% 4%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 10% 95%;
+
+    --border: 160 15% 14%;
+    --input: 160 15% 14%;
+    --ring: 160 45% 45%;
+
+    --sidebar-background: 160 25% 6%;
+    --sidebar-foreground: 60 10% 95%;
+    --sidebar-primary: 160 45% 45%;
+    --sidebar-primary-foreground: 160 30% 4%;
+    --sidebar-accent: 160 15% 10%;
+    --sidebar-accent-foreground: 60 10% 95%;
+    --sidebar-border: 160 15% 14%;
+    --sidebar-ring: 160 45% 45%;
+
+    --emerald-glow: 160 45% 50%;
+    --amber-warm: 38 92% 65%;
+    --amber-light: 45 50% 12%;
+    --surface-elevated: 160 25% 8%;
+    --surface-sunken: 160 25% 5%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--emerald-glow)));
+  }
+
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--amber-warm) / 0.08));
+  }
+
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--emerald-glow)));
+  }
+
+  .shadow-glow {
+    box-shadow: 0 8px 32px -8px hsl(var(--primary) / 0.25);
+  }
+
+  .shadow-card {
+    box-shadow: 0 1px 3px hsl(var(--foreground) / 0.04), 0 4px 12px hsl(var(--foreground) / 0.03);
+  }
+}
