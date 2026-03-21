@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Briefcase, BookOpen, Users, User, LayoutDashboard, LogOut, Shield, Settings } from "lucide-react";
+import { Menu, X, Briefcase, BookOpen, Users, User, LayoutDashboard, LogOut, Shield, Settings, GraduationCap, CreditCard, FileText } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
