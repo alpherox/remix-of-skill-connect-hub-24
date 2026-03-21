@@ -16,6 +16,7 @@ import { AdminEbooksTab } from "@/components/admin/AdminEbooksTab";
 import { AdminTestimonialsTab } from "@/components/admin/AdminTestimonialsTab";
 import { AdminSettingsTab } from "@/components/admin/AdminSettingsTab";
 import { AdminApplicationsTab } from "@/components/admin/AdminApplicationsTab";
+import { AdminPricingTab } from "@/components/admin/AdminPricingTab";
 
 const tabs = [
   { id: "overview", label: "Overview", icon: BarChart3 },
@@ -24,6 +25,7 @@ const tabs = [
   { id: "applications", label: "Applications", icon: FileText },
   { id: "courses", label: "Courses", icon: BookOpen },
   { id: "ebooks", label: "Ebooks", icon: FileImage },
+  { id: "pricing", label: "Pricing", icon: CreditCard },
   { id: "testimonials", label: "Testimonials", icon: MessageSquare },
   { id: "settings", label: "Site Settings", icon: Settings },
 ];
@@ -72,6 +74,7 @@ const AdminDashboard = () => {
           {activeTab === "applications" && <AdminApplicationsTab />}
           {activeTab === "courses" && <AdminCoursesTab />}
           {activeTab === "ebooks" && <AdminEbooksTab />}
+          {activeTab === "pricing" && <AdminPricingTab />}
           {activeTab === "testimonials" && <AdminTestimonialsTab />}
           {activeTab === "settings" && <AdminSettingsTab />}
         </div>

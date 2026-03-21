@@ -1,14 +1,16 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Briefcase, BookOpen, Users, User, LayoutDashboard, LogOut, Shield, Settings } from "lucide-react";
+import { Menu, X, Briefcase, BookOpen, Users, User, LayoutDashboard, LogOut, Shield, Settings, GraduationCap, CreditCard, FileText } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
 
 const navLinks = [
   { to: "/jobs", label: "Jobs", icon: Briefcase },
+  { to: "/courses", label: "Courses", icon: GraduationCap },
+  { to: "/ebooks", label: "Ebooks", icon: FileText },
   { to: "/marketplace", label: "Marketplace", icon: BookOpen },
-  { to: "/community", label: "Community", icon: Users },
+  { to: "/pricing", label: "Pricing", icon: CreditCard },
 ];
 
 export function Navbar() {

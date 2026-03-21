@@ -17,6 +17,10 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import AdminDashboard from "./pages/AdminDashboard";
 import Pricing from "./pages/Pricing";
+import Courses from "./pages/Courses";
+import CourseDetail from "./pages/CourseDetail";
+import Ebooks from "./pages/Ebooks";
+import EbookDetail from "./pages/EbookDetail";
 import About from "./pages/About";
 import Careers from "./pages/Careers";
 import Press from "./pages/Press";
@@ -45,6 +49,10 @@ const App = () => (
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/jobs/:id" element={<JobDetail />} />
             <Route path="/marketplace" element={<Marketplace />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/courses/:id" element={<CourseDetail />} />
+            <Route path="/ebooks" element={<Ebooks />} />
+            <Route path="/ebooks/:id" element={<EbookDetail />} />
             <Route path="/community" element={<Community />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
