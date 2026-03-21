@@ -16,6 +16,7 @@ import { AdminEbooksTab } from "@/components/admin/AdminEbooksTab";
 import { AdminTestimonialsTab } from "@/components/admin/AdminTestimonialsTab";
 import { AdminSettingsTab } from "@/components/admin/AdminSettingsTab";
 import { AdminApplicationsTab } from "@/components/admin/AdminApplicationsTab";
+import { AdminPricingTab } from "@/components/admin/AdminPricingTab";
 
 const tabs = [
   { id: "overview", label: "Overview", icon: BarChart3 },
