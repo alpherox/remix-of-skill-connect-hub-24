@@ -25,6 +25,7 @@ const tabs = [
   { id: "applications", label: "Applications", icon: FileText },
   { id: "courses", label: "Courses", icon: BookOpen },
   { id: "ebooks", label: "Ebooks", icon: FileImage },
+  { id: "pricing", label: "Pricing", icon: CreditCard },
   { id: "testimonials", label: "Testimonials", icon: MessageSquare },
   { id: "settings", label: "Site Settings", icon: Settings },
 ];
