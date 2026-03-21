@@ -74,6 +74,7 @@ const AdminDashboard = () => {
           {activeTab === "applications" && <AdminApplicationsTab />}
           {activeTab === "courses" && <AdminCoursesTab />}
           {activeTab === "ebooks" && <AdminEbooksTab />}
+          {activeTab === "pricing" && <AdminPricingTab />}
           {activeTab === "testimonials" && <AdminTestimonialsTab />}
           {activeTab === "settings" && <AdminSettingsTab />}
         </div>
