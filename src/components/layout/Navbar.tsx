@@ -7,8 +7,10 @@ import { useAuth } from "@/contexts/AuthContext";
 
 const navLinks = [
   { to: "/jobs", label: "Jobs", icon: Briefcase },
+  { to: "/courses", label: "Courses", icon: GraduationCap },
+  { to: "/ebooks", label: "Ebooks", icon: FileText },
   { to: "/marketplace", label: "Marketplace", icon: BookOpen },
-  { to: "/community", label: "Community", icon: Users },
+  { to: "/pricing", label: "Pricing", icon: CreditCard },
 ];
 
 export function Navbar() {
