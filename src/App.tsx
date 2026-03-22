@@ -26,6 +26,7 @@ import Careers from "./pages/Careers";
 import Press from "./pages/Press";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Help from "./pages/Help";
 import Guides from "./pages/Guides";
 import ApiPage from "./pages/ApiPage";
@@ -33,6 +34,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
 import Settings from "./pages/Settings";
+import Quiz from "./pages/Quiz";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -67,6 +69,7 @@ const App = () => (
             <Route path="/press" element={<Press />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/help" element={<Help />} />
             <Route path="/guides" element={<Guides />} />
             <Route path="/api" element={<ApiPage />} />
@@ -74,6 +77,7 @@ const App = () => (
             <Route path="/terms" element={<Terms />} />
             <Route path="/cookies" element={<Cookies />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/quiz" element={<Quiz />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

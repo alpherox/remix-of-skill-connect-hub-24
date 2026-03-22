@@ -43,7 +43,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
+      async (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
         if (session?.user) {
@@ -53,6 +53,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           setUserRole(null);
         }
         setLoading(false);
+
+        // Handle email verification redirect — when user clicks the email link
+        // the event will be SIGNED_IN with type=signup or PASSWORD_RECOVERY
+        if (event === "SIGNED_IN" && session?.user) {
+          // User has just verified email or signed in — handled by routing
+        }
       }
     );
 
@@ -74,11 +80,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       password,
       options: {
         data: { full_name: fullName, signup_role: role },
-        emailRedirectTo: window.location.origin,
+        emailRedirectTo: `${window.location.origin}/dashboard`,
       },
     });
     if (!error && data.user) {
-      // Assign role
       const roleValue = role === "employer" ? "employer" : "user";
       await supabase.from("user_roles").insert({ user_id: data.user.id, role: roleValue as any });
     }
