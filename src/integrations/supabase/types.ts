@@ -55,6 +55,42 @@ export type Database = {
           },
         ]
       }
+      blog_posts: {
+        Row: {
+          category: string | null
+          content: string | null
+          cover_url: string | null
+          created_at: string
+          id: string
+          published_at: string | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          content?: string | null
+          cover_url?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          content?: string | null
+          cover_url?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       courses: {
         Row: {
           category: string | null
@@ -175,6 +211,27 @@ export type Database = {
           tags?: string[] | null
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      job_alerts: {
+        Row: {
+          category: string | null
+          created_at: string
+          email: string
+          id: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          email: string
+          id?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          email?: string
+          id?: string
         }
         Relationships: []
       }
@@ -427,6 +484,33 @@ export type Database = {
           status?: string
           stripe_payment_id?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      quiz_questions: {
+        Row: {
+          created_at: string
+          id: string
+          options: string[] | null
+          question_text: string
+          recommended_content_ids: string[] | null
+          sort_order: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          options?: string[] | null
+          question_text: string
+          recommended_content_ids?: string[] | null
+          sort_order?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          options?: string[] | null
+          question_text?: string
+          recommended_content_ids?: string[] | null
+          sort_order?: number | null
         }
         Relationships: []
       }

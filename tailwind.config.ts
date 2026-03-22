@@ -61,8 +61,8 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        emerald: {
-          glow: "hsl(var(--emerald-glow))",
+        peach: {
+          glow: "hsl(var(--peach-glow))",
         },
         amber: {
           warm: "hsl(var(--amber-warm))",

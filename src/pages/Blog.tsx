@@ -2,18 +2,33 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
-
-const posts = [
-  { title: "10 Skills Employers Are Looking For in 2026", excerpt: "Stay ahead of the curve by mastering these in-demand skills.", date: "Mar 5, 2026", readTime: "5 min", category: "Career Advice" },
-  { title: "How AI Is Changing Job Matching Forever", excerpt: "A deep dive into how artificial intelligence is revolutionizing recruitment.", date: "Mar 1, 2026", readTime: "8 min", category: "Technology" },
-  { title: "Building a Personal Brand on LinkedIn", excerpt: "Actionable strategies to make your LinkedIn profile stand out.", date: "Feb 25, 2026", readTime: "6 min", category: "Personal Branding" },
-  { title: "The Ultimate Guide to Career Pivots", excerpt: "How to successfully transition to a new industry.", date: "Feb 20, 2026", readTime: "10 min", category: "Career Change" },
-  { title: "Negotiation Tactics That Actually Work", excerpt: "Proven strategies to land better offers and raises.", date: "Feb 15, 2026", readTime: "7 min", category: "Negotiation" },
-];
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Helmet } from "react-helmet-async";
+import { format } from "date-fns";
 
 const Blog = () => {
+  const { data: posts = [], isLoading } = useQuery({
+    queryKey: ["blog-posts"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .select("*")
+        .not("published_at", "is", null)
+        .order("published_at", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+  });
+
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Blog & Resources – SkillBridge</title>
+        <meta name="description" content="Insights, tips, and strategies for career growth." />
+      </Helmet>
       <Navbar />
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">
@@ -21,22 +36,45 @@ const Blog = () => {
             <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">The SkillBridge <span className="text-gradient">Blog</span></h1>
             <p className="text-lg text-muted-foreground">Insights, tips, and strategies for career growth and personal development.</p>
           </motion.div>
-          <div className="max-w-3xl mx-auto space-y-6">
-            {posts.map((post, index) => (
-              <motion.article key={post.title} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }} className="p-6 rounded-2xl bg-card border border-border shadow-card hover:shadow-glow transition-all cursor-pointer group">
-                <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">{post.category}</span>
-                <h2 className="font-display text-xl font-semibold text-foreground mt-3 mb-2 group-hover:text-primary transition-colors">{post.title}</h2>
-                <p className="text-muted-foreground mb-4">{post.excerpt}</p>
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <div className="flex items-center gap-4">
-                    <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{post.date}</span>
-                    <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{post.readTime}</span>
-                  </div>
-                  <span className="flex items-center gap-1 text-primary font-medium">Read More <ArrowRight className="w-3 h-3" /></span>
+
+          {isLoading ? (
+            <div className="max-w-3xl mx-auto space-y-6">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="p-6 rounded-2xl bg-card border border-border">
+                  <Skeleton className="h-4 w-20 mb-3" />
+                  <Skeleton className="h-6 w-3/4 mb-2" />
+                  <Skeleton className="h-4 w-full mb-4" />
+                  <Skeleton className="h-3 w-32" />
                 </div>
-              </motion.article>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : posts.length === 0 ? (
+            <p className="text-center text-muted-foreground py-12">No blog posts yet. Check back soon!</p>
+          ) : (
+            <div className="max-w-3xl mx-auto space-y-6">
+              {posts.map((post: any, index: number) => (
+                <motion.article key={post.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }}>
+                  <Link to={`/blog/${post.id}`} className="block p-6 rounded-2xl bg-card border border-border shadow-card hover:shadow-glow transition-all group">
+                    {post.cover_url && (
+                      <img src={post.cover_url} alt={post.title} className="w-full h-48 object-cover rounded-xl mb-4" />
+                    )}
+                    {post.category && (
+                      <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">{post.category}</span>
+                    )}
+                    <h2 className="font-display text-xl font-semibold text-foreground mt-3 mb-2 group-hover:text-primary transition-colors">{post.title}</h2>
+                    <p className="text-muted-foreground mb-4">{post.content?.substring(0, 150)}...</p>
+                    <div className="flex items-center justify-between text-sm text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {post.published_at ? format(new Date(post.published_at), "MMM d, yyyy") : ""}
+                      </span>
+                      <span className="flex items-center gap-1 text-primary font-medium">Read More <ArrowRight className="w-3 h-3" /></span>
+                    </div>
+                  </Link>
+                </motion.article>
+              ))}
+            </div>
+          )}
         </div>
       </main>
       <Footer />
