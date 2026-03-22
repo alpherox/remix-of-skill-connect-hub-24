@@ -1,16 +1,17 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Briefcase, BookOpen, Users, User, LayoutDashboard, LogOut, Shield, Settings, GraduationCap, CreditCard, FileText } from "lucide-react";
+import { Menu, X, Briefcase, BookOpen, Users, User, LayoutDashboard, LogOut, Shield, Settings, GraduationCap, CreditCard, FileText, Newspaper } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
+import { NotificationBell } from "@/components/layout/NotificationBell";
 
 const navLinks = [
   { to: "/jobs", label: "Jobs", icon: Briefcase },
   { to: "/courses", label: "Courses", icon: GraduationCap },
   { to: "/ebooks", label: "Ebooks", icon: FileText },
-  { to: "/marketplace", label: "Marketplace", icon: BookOpen },
   { to: "/pricing", label: "Pricing", icon: CreditCard },
+  { to: "/blog", label: "Blog", icon: Newspaper },
 ];
 
 export function Navbar() {
@@ -54,6 +55,7 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           {user ? (
             <>
+              <NotificationBell />
               <Button variant="ghost" size="sm" asChild>
                 <Link to="/dashboard" className="gap-2">
                   <LayoutDashboard className="w-4 h-4" />
